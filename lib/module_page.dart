@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:animate_do/animate_do.dart';
+import 'package:lottie/lottie.dart';
 
 class ModulesPage extends StatelessWidget {
   const ModulesPage({super.key});
@@ -8,72 +10,161 @@ class ModulesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Modules"),
+        title: Text("Modules GestiBTP", style: GoogleFonts.poppins()),
         backgroundColor: Colors.blueGrey,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            const Text(
-              "Modules disponibles",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 30),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                children: [
-                  _buildModuleCard(Icons.attach_money, "Dépenses"),
-                  _buildModuleCard(Icons.inventory, "Stock"),
-                  _buildModuleCard(Icons.engineering, "Projets"),
-                  _buildModuleCard(Icons.book, "Carnet"),
-                  _buildModuleCard(Icons.people, "Utilisateurs"),
-                ],
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF2196F3), Color(0xFF90CAF9)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              FadeInDown(
+                child: Lottie.asset('assets/animations/modules.json', height: 150),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                backgroundColor: Colors.blueAccent,
+              FadeInDown(
+                delay: const Duration(milliseconds: 300),
+                child: Text(
+                  "Découvrez nos modules",
+                  style: GoogleFonts.poppins(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 8,
+                        color: Colors.black45,
+                        offset: Offset(2, 2),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              child: const Text(
-                "Suivant",
-                style: TextStyle(fontSize: 20),
+              const SizedBox(height: 30),
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  children: [
+                    FadeInLeft(
+                      child: _buildModuleCard(
+                        context,
+                        Icons.attach_money,
+                        "Dépenses",
+                        Colors.green,
+                      ),
+                    ),
+                    FadeInRight(
+                      child: _buildModuleCard(
+                        context,
+                        Icons.inventory,
+                        "Stock",
+                        Colors.orange,
+                      ),
+                    ),
+                    FadeInLeft(
+                      child: _buildModuleCard(
+                        context,
+                        Icons.engineering,
+                        "Projets",
+                        Colors.blue,
+                      ),
+                    ),
+                    FadeInRight(
+                      child: _buildModuleCard(
+                        context,
+                        Icons.book,
+                        "Carnet",
+                        Colors.purple,
+                      ),
+                    ),
+                    FadeInLeft(
+                      child: _buildModuleCard(
+                        context,
+                        Icons.people,
+                        "Utilisateurs",
+                        Colors.red,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-          ],
+              FadeInUp(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/main');
+                  },
+                  child: const Text(
+                    "Se connecter",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildModuleCard(IconData icon, String title) {
+  Widget _buildModuleCard(
+      BuildContext context, IconData icon, String title, Color color) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      elevation: 6,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 60, color: Colors.blueGrey),
-            const SizedBox(height: 10),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(color: color.withOpacity(0.5), width: 2),
+      ),
+      elevation: 8,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20),
+        onTap: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Veuillez vous connecter pour accéder à ce module"),
+              duration: Duration(seconds: 2),
             ),
-          ],
+          );
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [color.withOpacity(0.2), color.withOpacity(0.4)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ZoomIn(
+                  child: Icon(
+                    icon,
+                    size: 60,
+                    color: color,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  title,
+                  style: GoogleFonts.poppins(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
