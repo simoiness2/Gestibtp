@@ -13,7 +13,7 @@ class AccueilPage extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/bg_tasks.jpg.jfif'), // ton image
+                image: AssetImage('assets/images/monimg1.webp'), // ton image
                 fit: BoxFit.cover,
               ),
             ),

@@ -25,31 +25,31 @@ class _LoadingPageState extends State<LoadingPage> {
       'title': 'Dépenses',
       'icon': Icons.attach_money,
       'color': Colors.green,
-      'animation': 'assets/animations/modules.json',
+      'animation': 'assets/images/monimg6.webp',
     },
     {
       'title': 'Stock',
       'icon': Icons.inventory,
       'color': Colors.orange,
-      'animation': 'assets/animations/modules.json',
+      'animation': 'assets/images/monimg5.webp',
     },
     {
       'title': 'Projets',
       'icon': Icons.engineering,
       'color': Colors.blue,
-      'animation': 'assets/animations/modules.json',
+      'animation': 'assets/images/monimg4.webp',
     },
     {
       'title': 'Carnet',
       'icon': Icons.book,
       'color': Colors.purple,
-      'animation': 'assets/animations/modules.json',
+      'animation': 'assets/images/monimg3.webp',
     },
     {
       'title': 'Utilisateurs',
       'icon': Icons.people,
       'color': Colors.red,
-      'animation': 'assets/animations/modules.json',
+      'animation': 'assets/images/monimg1.webp',
     },
   ];
 
@@ -69,20 +69,46 @@ class _LoadingPageState extends State<LoadingPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FadeInDown(
-                child: Text(
-                  'Bienvenue chez GestiBTP',
-                  style: GoogleFonts.poppins(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    shadows: [
-                      Shadow(
-                        blurRadius: 8,
-                        color: Colors.black45,
-                        offset: Offset(2, 2),
+                child: Column(
+                  children: [
+                    Container(
+                      width: 120,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            blurRadius: 10,
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.asset(
+                          'assets/images/Gemini_Generated_Image_b8lqp0b8lqp0b8lq.webp',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      'Bienvenue chez GestiBTP',
+                      style: GoogleFonts.poppins(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 8,
+                            color: Colors.black45,
+                            offset: Offset(2, 2),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 30),

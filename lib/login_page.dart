@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:animate_do/animate_do.dart';
 
 class LoginPage extends StatefulWidget {
@@ -38,7 +37,8 @@ class _LoginPageState extends State<LoginPage> {
 
   void validateEmail(String value) {
     setState(() {
-      _isEmailValid = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value);
+      _isEmailValid =
+          RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value);
     });
   }
 
@@ -66,7 +66,27 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Lottie.asset('assets/animations/construction.json', height: 200),
+                  Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          blurRadius: 15,
+                          offset: const Offset(0, 8),
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(25),
+                      child: Image.asset(
+                        'assets/images/Gemini_Generated_Image_b8lqp0b8lqp0b8lq.webp',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 20),
                   Text(
                     "GestiBTP",
@@ -91,7 +111,8 @@ class _LoginPageState extends State<LoginPage> {
                       filled: true,
                       fillColor: Colors.white,
                       hintText: "Email",
-                      prefixIcon: const Icon(Icons.email, color: Colors.blueGrey),
+                      prefixIcon:
+                          const Icon(Icons.email, color: Colors.blueGrey),
                       errorText: _isEmailValid ? null : "Email invalide",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
@@ -108,8 +129,10 @@ class _LoginPageState extends State<LoginPage> {
                       filled: true,
                       fillColor: Colors.white,
                       hintText: "Mot de passe",
-                      prefixIcon: const Icon(Icons.lock, color: Colors.blueGrey),
-                      errorText: _isPasswordValid ? null : "Mot de passe trop court",
+                      prefixIcon:
+                          const Icon(Icons.lock, color: Colors.blueGrey),
+                      errorText:
+                          _isPasswordValid ? null : "Mot de passe trop court",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
@@ -122,7 +145,8 @@ class _LoginPageState extends State<LoginPage> {
                     child: FadeInUp(
                       child: ElevatedButton(
                         onPressed: login,
-                        child: const Text("Se connecter", style: TextStyle(fontSize: 18)),
+                        child: const Text("Se connecter",
+                            style: TextStyle(fontSize: 18)),
                       ),
                     ),
                   ),
